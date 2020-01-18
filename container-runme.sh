@@ -48,7 +48,5 @@ repo sync
 
 # SETUP THE BUILD ENV AND BITBAKE SYSTEM IMAGE
 set +x
-echo "export TEMPLATECONF=meta-tablesafe/conf"
 echo ". sources/oe-init-build-env build"
-echo "export MACHINE=tablesafe-machine"
-echo "bitbake virtual/kernel"
+echo "bitbake core-image-base"
