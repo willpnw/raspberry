@@ -16,7 +16,7 @@ ifneq ($(shell $(container-inspect-cmd) 1>/dev/null 2>&1; echo $$?), 0)
 endif
 endif
 
-dockerfile: Dockerfile
+build: Dockerfile
 	@docker build \
 		--build-arg GID=$(shell id -g) \
 		--build-arg HOME=$(HOME) \
@@ -26,7 +26,7 @@ dockerfile: Dockerfile
 		--tag $(CONTAINER_IMAGE_NAME) \
                 .
 
-docker: $(DATA_DIR)
+run: $(DATA_DIR)
 	@docker run --interactive --rm --tty --name $(CONTAINER_IMAGE_NAME) \
 		$(foreach id,$(shell id -G), --group-add $(id)) \
 		--env SSH_AUTH_SOCK=/run/ssh-agent \
