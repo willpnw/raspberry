@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <remote name="yoctoproject" fetch="git://git.yoctoproject.org/" revision="warrior" />
+    <remote name="openembedded" fetch="https://github.com/openembedded" revision="warrior" />
+    <remote name="willpnw" fetch="https://github.com/willpnw" revision="warrior" />
+
+    <project name="poky" remote="yoctoproject" path="." />
+    <project name="meta-raspberrypi" remote="willpnw" path="meta-raspberrypi" />
+    <project name="meta-openembedded" remote="openembedded" path="meta-openembedded" />
+</manifest>
