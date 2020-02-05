@@ -4,24 +4,22 @@ set -ex
 
 # SETUP SSH KEYS
 mkdir -p ~/.ssh
-ssh-keygen -F bitbucket.org || ssh-keyscan -t rsa bitbucket.org >> ~/.ssh/known_hosts
-ssh-keygen -F github.com || ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+for host in bitbucket.org github.com code.qt.io; do
+    ssh-keygen -F $host || ssh-keyscan -t rsa $host >> ~/.ssh/known_hosts
+done
 
 # GIT CONFIG
 git config --global user.name "Will Patterson"
 git config --global user.email "wpatterson@witekio.com"
 
-cd sources
-test -d .repo || repo init -u git@github.com:willpnw/raspberry.git
-
+#test -d .repo || repo init -u git@github.com:willpnw/raspberry.git
+test -d .repo || repo init -u git://code.qt.io/yocto/boot2qt-manifest -m v5.13.2.xml
 repo sync
 
 # SETUP THE BUILD ENV AND BITBAKE SYSTEM IMAGE
 set +x
 echo ""
 echo ""
-echo ""
-echo ""
-echo ""
-echo ". sources/oe-init-build-env build"
-echo "bitbake core-image-base"
+echo "export MACHINE=raspberrypi3"
+echo "source ./setup-environment.sh build"
+echo "bitbake b2qt-embedded-qt5-image"

@@ -24,6 +24,9 @@ RUN apt-get update \
         tmux \
         unzip \
         wget \
+        git-lfs \
+        gcc-multilib \
+        g++-multilib \
  && sed --in-place '/en_US.UTF-8/s/^# //' /etc/locale.gen \
  && locale-gen \
  && apt-get clean \
